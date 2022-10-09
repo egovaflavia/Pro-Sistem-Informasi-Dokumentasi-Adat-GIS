@@ -19,10 +19,10 @@
 
     $.ajax({
         type: "GET",
-        url: "{{ route('backend.makanan.gis') }}",
+        url: "{{ route('backend.kesenian.gis') }}",
         success: function (response) {
             $.each(response, function (key, value) {
-                L.marker([value.makanan_lat, value.makanan_long]).bindPopup(`<strong>${value.makanan_nama}</strong> <br> <p>${value.makanan_ket}</p>`).openPopup().addTo(mymap);
+                L.marker([value.kesenian_lat, value.kesenian_long]).bindPopup(`<strong>${value.kesenian_nama}</strong> <br> <p>${value.kesenian_ket}</p>`).openPopup().addTo(mymap);
             });
         }
     });
@@ -30,9 +30,6 @@
 </script>
 
 <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
-<script src="{{ asset('assets/extensions/summernote/summernote-lite.min.js') }}"></script>
-<script src="{{ asset('assets/js/pages/summernote.js') }}"></script>
-<script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
 
 @section('content')
@@ -43,8 +40,8 @@
         <div id="map"></div>
 
         <div class="card-header">
-            <h3> Makanan</h3>
-            <a href="{{ route('backend.makanan.create') }}" class="btn btn-success">
+            <h3>Kesenian</h3>
+            <a href="{{ route('backend.kesenian.create') }}" class="btn btn-success">
                 Tambah Data
             </a>
         </div>
@@ -61,20 +58,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($data as $no => $baris)
+                    @forelse ($data as $no => $row)
                     <tr>
                         <td>{{ ++$no }}</td>
-                        <td>{{ $baris->makanan_nama }}</td>
+                        <td>{{ $row->kesenian_nama }}</td>
                         <td>
-                            <img style="width: 40%" src="{{ asset('storage/makanan/'.$baris->makanan_img) }}" alt="">
+                            <img style="width: 40%" src="{{ asset('storage/kesenian/'.$row->kesenian_img) }}" alt="">
                         </td>
-                        <td>{{ $baris->makanan_lat }} | {{ $baris->makanan_long }}</td>
-                        <td>{{ $baris->makanan_ket }}</td>
+                        <td>{{ $row->kesenian_lat }} | {{ $row->kesenian_long }}</td>
+                        <td>{{ $row->kesenian_ket }}</td>
                         <td>
                             <div class="buttons">
-                                <a href="{{ route('backend.makanan.edit',$baris->makanan_id ) }}"
+                                <a href="{{ route('backend.kesenian.edit',$row->kesenian_id ) }}"
                                     class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
-                                <a href="{{ route('backend.makanan.destroy',$baris->makanan_id ) }}"
+                                <a href="{{ route('backend.kesenian.destroy',$row->kesenian_id ) }}"
                                     class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
                             </div>
                         </td>

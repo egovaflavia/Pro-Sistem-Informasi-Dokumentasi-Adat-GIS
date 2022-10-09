@@ -40,7 +40,7 @@ INSERT INTO `tb_berita` (`berita_id`, `user_id`, `berita_judul`, `berita_isi`, `
 
 -- Dumping structure for table pro_sistem_informasi_dokumentasi_adat_gis.tb_kerajinan
 CREATE TABLE IF NOT EXISTS `tb_kerajinan` (
-  `kerajinan_id` int(11) NOT NULL,
+  `kerajinan_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
   `kerajinan_nama` varchar(50) DEFAULT '',
   `kerajinan_img` text,
@@ -51,11 +51,13 @@ CREATE TABLE IF NOT EXISTS `tb_kerajinan` (
   PRIMARY KEY (`kerajinan_id`),
   KEY `FK_tb_kerajinan_users` (`user_id`),
   CONSTRAINT `FK_tb_kerajinan_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pro_sistem_informasi_dokumentasi_adat_gis.tb_kerajinan: ~0 rows (approximately)
+-- Dumping data for table pro_sistem_informasi_dokumentasi_adat_gis.tb_kerajinan: ~1 rows (approximately)
 DELETE FROM `tb_kerajinan`;
 /*!40000 ALTER TABLE `tb_kerajinan` DISABLE KEYS */;
+INSERT INTO `tb_kerajinan` (`kerajinan_id`, `user_id`, `kerajinan_nama`, `kerajinan_img`, `kerajinan_lat`, `kerajinan_long`, `kerajinan_ket`, `kerajinan_time`) VALUES
+	(1, 2, 'Kerajinan', '1NBdVvqrudW9Powu0unyTQVuu3pvN6dAOt5Uh1Gp.jpg', '-0.819827', '101.230774', '<p>Test</p>', NULL);
 /*!40000 ALTER TABLE `tb_kerajinan` ENABLE KEYS */;
 
 -- Dumping structure for table pro_sistem_informasi_dokumentasi_adat_gis.tb_kesenian
@@ -67,15 +69,17 @@ CREATE TABLE IF NOT EXISTS `tb_kesenian` (
   `kesenian_lat` varchar(50) DEFAULT NULL,
   `kesenian_long` varchar(50) DEFAULT NULL,
   `kesenian_ket` text,
-  `kesenian_time` datetime DEFAULT NULL,
+  `kesenian_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`kesenian_id`),
   KEY `FK_tb_kesenian_users` (`user_id`),
   CONSTRAINT `FK_tb_kesenian_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pro_sistem_informasi_dokumentasi_adat_gis.tb_kesenian: ~0 rows (approximately)
+-- Dumping data for table pro_sistem_informasi_dokumentasi_adat_gis.tb_kesenian: ~1 rows (approximately)
 DELETE FROM `tb_kesenian`;
 /*!40000 ALTER TABLE `tb_kesenian` DISABLE KEYS */;
+INSERT INTO `tb_kesenian` (`kesenian_id`, `user_id`, `kesenian_nama`, `kesenian_img`, `kesenian_lat`, `kesenian_long`, `kesenian_ket`, `kesenian_time`) VALUES
+	(1, 2, 'Kesenian2', 'ONx5lrfJkYOI2jnjG5sDQ0GcPrUGAxgyby8X2DbW.jpg', '-0.039825', '100.307922', '<p>Test</p>', NULL);
 /*!40000 ALTER TABLE `tb_kesenian` ENABLE KEYS */;
 
 -- Dumping structure for table pro_sistem_informasi_dokumentasi_adat_gis.tb_makanan
@@ -87,15 +91,17 @@ CREATE TABLE IF NOT EXISTS `tb_makanan` (
   `makanan_lat` varchar(50) NOT NULL,
   `makanan_long` varchar(50) NOT NULL,
   `makanan_ket` text NOT NULL,
-  `makanan_time` datetime NOT NULL,
+  `makanan_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`makanan_id`),
   KEY `FK_tb_makanan_users` (`user_id`),
   CONSTRAINT `FK_tb_makanan_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pro_sistem_informasi_dokumentasi_adat_gis.tb_makanan: ~0 rows (approximately)
+-- Dumping data for table pro_sistem_informasi_dokumentasi_adat_gis.tb_makanan: ~1 rows (approximately)
 DELETE FROM `tb_makanan`;
 /*!40000 ALTER TABLE `tb_makanan` DISABLE KEYS */;
+INSERT INTO `tb_makanan` (`makanan_id`, `user_id`, `makanan_nama`, `makanan_img`, `makanan_lat`, `makanan_long`, `makanan_ket`, `makanan_time`) VALUES
+	(2, 2, 'Rendang Jawi1', 'M63rur1oYAyaoJgimLIZ4QQ2LKrN46I6PZcPg6yZ.jpg', '-0.819827', '101.230774', '<p>Rendang atau randang dalam bahasa Minangkabau adalah Masakan Minangkabau yang berbahan dasar daging yang berasal dari Sumatera Barat, Indonesia. Masakan ini dihasilkan dari proses memasak suhu rendah dalam waktu lama dengan menggunakan aneka rempah-rempah dan santan</p>', '2022-10-09 19:05:55');
 /*!40000 ALTER TABLE `tb_makanan` ENABLE KEYS */;
 
 -- Dumping structure for table pro_sistem_informasi_dokumentasi_adat_gis.tb_pepatah
@@ -104,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `tb_pepatah` (
   `user_id` bigint(20) unsigned NOT NULL,
   `pepatah_petitih` text,
   `pepatah_terjemah` text,
-  `pepatah_time` datetime DEFAULT NULL,
+  `pepatah_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`pepatah_id`),
   KEY `FK_tb_pepatah_users` (`user_id`),
   CONSTRAINT `FK_tb_pepatah_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -124,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `tb_perhelatan` (
   `perhelatan_lat` varchar(50) DEFAULT NULL,
   `perhelatan_long` varchar(50) DEFAULT NULL,
   `perhelatan_ket` text,
-  `perhelatan_time` datetime DEFAULT NULL,
+  `perhelatan_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`perhelatan_id`),
   KEY `FK_tb_perhelatan_users` (`user_id`),
   CONSTRAINT `FK_tb_perhelatan_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)

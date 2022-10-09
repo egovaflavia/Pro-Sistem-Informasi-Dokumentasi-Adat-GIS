@@ -18,6 +18,11 @@
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
     @stack('head')
 </head>
 

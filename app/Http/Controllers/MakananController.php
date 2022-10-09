@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MakananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $data = Makanan::with('user')->get();
@@ -22,39 +18,36 @@ class MakananController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function gis()
+    {
+        $data = Makanan::all();
+        return response()->json($data);
+    }
+
     public function create()
     {
         return view('backend.page.makanan.tambah');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'makanan_nama'  => 'required',
-            'berita_status' => 'required',
-            'berita_isi'    => 'required',
-            'makanan_img'    => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'makanan_nama' => 'required',
+            'makanan_lat'  => 'required',
+            'makanan_long' => 'required',
+            'makanan_ket'  => 'required',
+            'makanan_img'  => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         ], [
             'required' => ':attribute harus di isi ',
             'mimes'    => ':attribute harus format jpeg/jpg/png/gif/svg',
             'image'    => ':attribute harus berupa gambar',
             'max'      => ':attribute Maksimal 2MB'
         ], [
-            'berita_judul'  => 'Judul Berita',
-            'berita_status' => 'Status Berita',
-            'berita_isi'    => 'Isi berita',
-            'berita_img'    => 'Gambar Berita',
+            'makanan_nama' => 'Nama Makanan',
+            'makanan_lat'  => 'Latitude',
+            'makanan_long' => 'Longtitude',
+            'makanan_ket'  => 'Keterangan',
+            'makanan_img'  => 'Gambar'
         ]);
 
         # If Error
@@ -63,115 +56,101 @@ class MakananController extends Controller
         }
 
         # Upload image
-        $image = $request->file('berita_img');
-        $image->storeAs('public/berita', $image->hashName());
+        $image = $request->file('makanan_img');
+        $image->storeAs('public/makanan', $image->hashName());
 
         # Create data post
         Makanan::create([
-            'berita_judul'  => $request->berita_judul,
-            'berita_status' => $request->berita_status,
-            'berita_isi'    => $request->berita_isi,
-            'berita_img'    => $image->hashName(),
-            'user_id'       => auth()->user()->id,
+            'makanan_nama' => $request->makanan_nama,
+            'makanan_lat'  => $request->makanan_lat,
+            'makanan_long' => $request->makanan_long,
+            'makanan_ket'  => $request->makanan_ket,
+            'makanan_img'  => $image->hashName(),
+            'user_id'      => auth()->user()->id,
         ]);
 
         return redirect()->route('backend.makanan.index')->with('success', 'Data disimpan');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $row = Makanan::where('berita_id', $id)->first();
+        $row = Makanan::where('makanan_id', $id)->first();
         return view('backend.page.makanan.edit', compact('row'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'berita_judul'  => 'required',
-            'berita_status' => 'required',
-            'berita_isi'    => 'required',
-            'berita_img'    => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'makanan_nama' => 'required',
+            'makanan_lat'  => 'required',
+            'makanan_long' => 'required',
+            'makanan_ket'  => 'required',
+            'makanan_img'  => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         ], [
             'required' => ':attribute harus di isi ',
             'mimes'    => ':attribute harus format jpeg/jpg/png/gif/svg',
             'image'    => ':attribute harus berupa gambar',
             'max'      => ':attribute Maksimal 2MB'
         ], [
-            'berita_judul'  => 'Judul Berita',
-            'berita_status' => 'Status Berita',
-            'berita_isi'    => 'Isi berita',
-            'berita_img'    => 'Gambar Berita',
+            'makanan_nama' => 'Nama Makanan',
+            'makanan_lat'  => 'Latitude',
+            'makanan_long' => 'Longtitude',
+            'makanan_ket'  => 'Keterangan',
+            'makanan_img'  => 'Gambar'
         ]);
 
-        # Error
+        # If Error
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return back()->withErrors($validator->errors())->withInput()->with('danger', 'Data gagal disimpan');
         }
 
-        $row = Makanan::where('berita_id', $request->berita_id)->first();
+        $row = Makanan::where('makanan_id', $request->makanan_id)->first();
 
         # check image not empty
-        if ($request->hasFile('berita_img')) {
+        if ($request->hasFile('makanan_img')) {
             # Upload image
-            $image = $request->file('berita_img');
-            $image->storeAs('public/berita', $image->hashName());
+            $image = $request->file('makanan_img');
+            $image->storeAs('public/makanan', $image->hashName());
 
             # Delete old image
             Storage::delete(
-                'public/berita/' . $row->berita_img
+                'public/makanan/' . $row->makanan_img
             );
 
             # Update with new image
-            Makanan::where('berita_id', $request->berita_id)
+            Makanan::where('makanan_id', $request->makanan_id)
                 ->update([
-                    'berita_judul'  => $request->berita_judul,
-                    'berita_status' => $request->berita_status,
-                    'berita_isi'    => $request->berita_isi,
-                    'berita_img'    => $image->hashName(),
-                    'user_id'       => auth()->user()->id,
+                    'makanan_nama' => $request->makanan_nama,
+                    'makanan_lat'  => $request->makanan_lat,
+                    'makanan_long' => $request->makanan_long,
+                    'makanan_ket'  => $request->makanan_ket,
+                    'makanan_img'  => $image->hashName(),
+                    'user_id'      => auth()->user()->id,
                 ]);
         } else {
             # Update w/o image
-            Makanan::where('berita_id', $request->berita_id)
+            Makanan::where('makanan_id', $request->makanan_id)
                 ->update([
-                    'berita_judul'  => $request->berita_judul,
-                    'berita_status' => $request->berita_status,
-                    'berita_isi'    => $request->berita_isi,
-                    'user_id'       => auth()->user()->id,
+                    'makanan_nama' => $request->makanan_nama,
+                    'makanan_lat'  => $request->makanan_lat,
+                    'makanan_long' => $request->makanan_long,
+                    'makanan_ket'  => $request->makanan_ket,
+                    'user_id'      => auth()->user()->id,
                 ]);
         }
 
         return redirect()->route('backend.makanan.index')->with('success', 'Data diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $row = Makanan::where('berita_id', $id)->first();
+        $row = Makanan::where('makanan_id', $id)->first();
 
         Storage::delete(
-            'public/berita/' . $row->berita_img
+            'public/makanan/' . $row->makanan_img
         );
 
-        Makanan::where('berita_id', $id)->delete();
+        Makanan::where('makanan_id', $id)->delete();
         return redirect()->route('backend.makanan.index')->with('success', 'Data dihapus');
     }
 }

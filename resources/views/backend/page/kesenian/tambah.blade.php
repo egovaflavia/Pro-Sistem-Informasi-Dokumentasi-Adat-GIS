@@ -1,7 +1,8 @@
 @extends('backend.layouts.app')
+
 @push('head')
-<link rel="stylesheet" href="{{ asset('storage/assets/extensions/sweetalert2/sweetalert2.min.css') }}">
 @endpush
+
 @push('body')
 <script>
     $(document).ready(function () {
@@ -46,8 +47,8 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h3> {{ ucfirst(collect(request()->segments())->last()) }}</h3>
-            <a href="{{ route('backend.makanan.index') }}" class="btn btn-success">
+            <h3>Kesenian</h3>
+            <a href="{{ route('backend.kesenian.index') }}" class="btn btn-success">
                 Kembali
             </a>
 
@@ -55,15 +56,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="{{ route('backend.makanan.store') }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('backend.kesenian.store') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="modal-body">
-                            <label>Nama Makanan: </label>
+                            <label>Nama : </label>
                             <div class="form-group">
-                                <input type="text" name="makanan_nama" id="makanan_nama" placeholder="Judul Berita"
-                                    class="form-control" value="{{ old('makanan_nama') }}">
-                                @if ($errors->has('makanan_nama'))
-                                <span class="text-danger">{{ $errors->first('makanan_nama') }}</span>
+                                <input type="text" name="kesenian_nama" id="kesenian_nama" placeholder=""
+                                    class="form-control" value="{{ old('kesenian_nama') }}">
+                                @if ($errors->has('kesenian_nama'))
+                                <span class="text-danger">{{ $errors->first('kesenian_nama') }}</span>
                                 @endif
                             </div>
 
@@ -72,10 +73,11 @@
                                     <label>Latitude : </label>
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <input type="text" name="makanan_lat" id="makanan_lat" class="form-control">
+                                            <input type="text" name="kesenian_lat" id="kesenian_lat"
+                                                class="form-control">
                                         </div>
-                                        @if ($errors->has('makanan_lat'))
-                                        <span class="text-danger">{{ $errors->first('makanan_lat') }}</span>
+                                        @if ($errors->has('kesenian_lat'))
+                                        <span class="text-danger">{{ $errors->first('kesenian_lat') }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -83,11 +85,11 @@
                                     <label>Longtitude : </label>
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <input type="text" name="makanan_long" id="makanan_long"
+                                            <input type="text" name="kesenian_long" id="kesenian_long"
                                                 class="form-control">
                                         </div>
-                                        @if ($errors->has('makanan_long'))
-                                        <span class="text-danger">{{ $errors->first('makanan_long') }}</span>
+                                        @if ($errors->has('kesenian_long'))
+                                        <span class="text-danger">{{ $errors->first('kesenian_long') }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -96,15 +98,15 @@
                                 <div class="col-md-12">
                                     <label>Gambar : </label>
                                     <div class="form-group">
-                                        <input type="file" name="makanan_img" id="makanan_img" class="form-control">
+                                        <input type="file" name="kesenian_img" id="kesenian_img" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <label>Keterangan : </label>
                             <div class="form-group">
-                                <textarea name="makanan_ket" id="editor">{{ old('makanan_ket') }}</textarea>
-                                @if ($errors->has('makanan_ket'))
-                                <span class="text-danger">{{ $errors->first('makanan_ket') }}</span>
+                                <textarea name="kesenian_ket" id="editor">{{ old('kesenian_ket') }}</textarea>
+                                @if ($errors->has('kesenian_ket'))
+                                <span class="text-danger">{{ $errors->first('kesenian_ket') }}</span>
                                 @endif
                             </div>
                         </div>

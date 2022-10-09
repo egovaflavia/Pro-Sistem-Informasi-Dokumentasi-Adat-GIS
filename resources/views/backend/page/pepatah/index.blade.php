@@ -19,10 +19,10 @@
 
     $.ajax({
         type: "GET",
-        url: "{{ route('backend.makanan.gis') }}",
+        url: "{{ route('backend.pepatah.gis') }}",
         success: function (response) {
             $.each(response, function (key, value) {
-                L.marker([value.makanan_lat, value.makanan_long]).bindPopup(`<strong>${value.makanan_nama}</strong> <br> <p>${value.makanan_ket}</p>`).openPopup().addTo(mymap);
+                L.marker([value.pepatah_lat, value.pepatah_long]).bindPopup(`<strong>${value.pepatah_nama}</strong> <br> <p>${value.pepatah_ket}</p>`).openPopup().addTo(mymap);
             });
         }
     });
@@ -30,9 +30,6 @@
 </script>
 
 <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
-<script src="{{ asset('assets/extensions/summernote/summernote-lite.min.js') }}"></script>
-<script src="{{ asset('assets/js/pages/summernote.js') }}"></script>
-<script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
 
 @section('content')
@@ -43,8 +40,8 @@
         <div id="map"></div>
 
         <div class="card-header">
-            <h3> Makanan</h3>
-            <a href="{{ route('backend.makanan.create') }}" class="btn btn-success">
+            <h3> Pepatah</h3>
+            <a href="{{ route('backend.pepatah.create') }}" class="btn btn-success">
                 Tambah Data
             </a>
         </div>
@@ -61,20 +58,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($data as $no => $baris)
+                    @forelse ($data as $no => $row)
                     <tr>
                         <td>{{ ++$no }}</td>
-                        <td>{{ $baris->makanan_nama }}</td>
+                        <td>{{ $row->pepatah_nama }}</td>
                         <td>
-                            <img style="width: 40%" src="{{ asset('storage/makanan/'.$baris->makanan_img) }}" alt="">
+                            <img style="width: 40%" src="{{ asset('storage/pepatah/'.$row->pepatah_img) }}" alt="">
                         </td>
-                        <td>{{ $baris->makanan_lat }} | {{ $baris->makanan_long }}</td>
-                        <td>{{ $baris->makanan_ket }}</td>
+                        <td>{{ $row->pepatah_lat }} | {{ $row->pepatah_long }}</td>
+                        <td>{{ $row->pepatah_ket }}</td>
                         <td>
                             <div class="buttons">
-                                <a href="{{ route('backend.makanan.edit',$baris->makanan_id ) }}"
+                                <a href="{{ route('backend.pepatah.edit',$row->pepatah_id ) }}"
                                     class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
-                                <a href="{{ route('backend.makanan.destroy',$baris->makanan_id ) }}"
+                                <a href="{{ route('backend.pepatah.destroy',$row->pepatah_id ) }}"
                                     class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
                             </div>
                         </td>

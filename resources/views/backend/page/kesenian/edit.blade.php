@@ -1,7 +1,5 @@
 @extends('backend.layouts.app')
-@push('head')
-<link rel="stylesheet" href="{{ asset('storage/assets/extensions/sweetalert2/sweetalert2.min.css') }}">
-@endpush
+
 @push('body')
 <script>
     $(document).ready(function () {
@@ -39,31 +37,33 @@
 </script>
 <script src="{{ asset('storage/assets/extensions/jquery/jquery.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-
 @endpush
 @section('content')
-
+@include('backend.layouts.alert')
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h3> {{ ucfirst(collect(request()->segments())->last()) }}</h3>
-            <a href="{{ route('backend.makanan.index') }}" class="btn btn-success">
+            <h3>Kesenian</h3>
+            <a href="{{ route('backend.kesenian.index') }}" class="btn btn-success">
                 Kembali
             </a>
 
         </div>
         <div class="card-body">
+
             <div class="row">
                 <div class="col-md-6">
-                    <form action="{{ route('backend.makanan.store') }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('backend.kesenian.update') }}" enctype="multipart/form-data" method="POST">
                         @csrf
+                        @method('PUT')
+                        <input type="hidden" name="kesenian_id" value="{{ $row->kesenian_id }}">
                         <div class="modal-body">
                             <label>Nama Makanan: </label>
                             <div class="form-group">
-                                <input type="text" name="makanan_nama" id="makanan_nama" placeholder="Judul Berita"
-                                    class="form-control" value="{{ old('makanan_nama') }}">
-                                @if ($errors->has('makanan_nama'))
-                                <span class="text-danger">{{ $errors->first('makanan_nama') }}</span>
+                                <input type="text" name="kesenian_nama" id="kesenian_nama" placeholder="Judul Berita"
+                                    class="form-control" value="{{ old('kesenian_nama') ?? $row->kesenian_nama }}">
+                                @if ($errors->has('kesenian_nama'))
+                                <span class="text-danger">{{ $errors->first('kesenian_nama') }}</span>
                                 @endif
                             </div>
 
@@ -72,10 +72,11 @@
                                     <label>Latitude : </label>
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <input type="text" name="makanan_lat" id="makanan_lat" class="form-control">
+                                            <input type="text" name="kesenian_lat" id="kesenian_lat" class="form-control"
+                                                value="{{ old('kesenian_lat') ?? $row->kesenian_lat }}">
                                         </div>
-                                        @if ($errors->has('makanan_lat'))
-                                        <span class="text-danger">{{ $errors->first('makanan_lat') }}</span>
+                                        @if ($errors->has('kesenian_lat'))
+                                        <span class="text-danger">{{ $errors->first('kesenian_lat') }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -83,33 +84,37 @@
                                     <label>Longtitude : </label>
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <input type="text" name="makanan_long" id="makanan_long"
-                                                class="form-control">
+                                            <input type="text" name="kesenian_long" id="kesenian_long"
+                                                class="form-control"
+                                                value="{{ old('kesenian_long') ?? $row->kesenian_long }}">
                                         </div>
-                                        @if ($errors->has('makanan_long'))
-                                        <span class="text-danger">{{ $errors->first('makanan_long') }}</span>
+                                        @if ($errors->has('kesenian_long'))
+                                        <span class="text-danger">{{ $errors->first('kesenian_long') }}</span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <label>Gambar : </label>
-                                    <div class="form-group">
-                                        <input type="file" name="makanan_img" id="makanan_img" class="form-control">
+                                <label>Gambar : </label>
+                                <div class="form-group position-relative has-icon-right">
+                                    <input type="file" name="kesenian_img" id="kesenian_img" class="form-control">
+                                    <div class="form-control-icon">
+                                        <img style="height: 30px;width: 30px"
+                                            src="{{ asset('storage/kesenian/'. $row->kesenian_img) }}" alt="No img">
                                     </div>
                                 </div>
                             </div>
                             <label>Keterangan : </label>
                             <div class="form-group">
-                                <textarea name="makanan_ket" id="editor">{{ old('makanan_ket') }}</textarea>
-                                @if ($errors->has('makanan_ket'))
-                                <span class="text-danger">{{ $errors->first('makanan_ket') }}</span>
+                                <textarea name="kesenian_ket"
+                                    id="editor">{{ old('kesenian_ket') ?? $row->kesenian_ket }}</textarea>
+                                @if ($errors->has('kesenian_ket'))
+                                <span class="text-danger">{{ $errors->first('kesenian_ket') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="simpan" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                            <button type="submit" id="simpan" class="btn btn-primary ml-1">
                                 <i class="bx bx-check d-block d-sm-none"></i>
                                 <span class="d-none d-sm-block">Save</span>
                             </button>
