@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ ucfirst(Route::current()->getName()) }} - {{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/main/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/pages/auth.css') }}">
-    <link rel="shortcut icon" href="{{ asset('storage/assets/images/logo/logo-mng.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('storage/assets/images/logo/logo-mng.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('assets/css/main/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/auth.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo-mng.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo-mng.png') }}" type="image/png">
 </head>
 
 <body>

@@ -49,12 +49,12 @@ Route::group([
         'prefix' => 'makanan/',
         'as' => 'makanan.'
     ], function () {
-        Route::get('index', [BeritaController::class, 'index'])->name('index');
-        Route::get('create', [BeritaController::class, 'create'])->name('create');
-        Route::get('edit/{berita_id}', [BeritaController::class, 'edit'])->name('edit');
-        Route::post('store', [BeritaController::class, 'store'])->name('store');
-        Route::put('update', [BeritaController::class, 'update'])->name('update');
-        Route::get('destroy/{berita_id}', [BeritaController::class, 'destroy'])->name('destroy');
+        Route::get('index', [MakananController::class, 'index'])->name('index');
+        Route::get('create', [MakananController::class, 'create'])->name('create');
+        Route::get('edit/{berita_id}', [MakananController::class, 'edit'])->name('edit');
+        Route::post('store', [MakananController::class, 'store'])->name('store');
+        Route::put('update', [MakananController::class, 'update'])->name('update');
+        Route::get('destroy/{berita_id}', [MakananController::class, 'destroy'])->name('destroy');
     });
 
     Route::group([
@@ -104,7 +104,6 @@ Route::group([
         Route::put('update', [PepatahController::class, 'update'])->name('update');
         Route::get('destroy/{berita_id}', [PepatahController::class, 'destroy'])->name('destroy');
     });
-    
 });
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'login'])->name('login');

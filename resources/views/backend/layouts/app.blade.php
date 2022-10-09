@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/main/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('storage/assets/images/logo/logo-mng.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('storage/assets/images/logo/logo-mng.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/shared/iconly.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main/app.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo-mng.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo-mng.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('assets/css/shared/iconly.css') }}">
+    {{-- Gis --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
         integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-    <script src="{{ asset('storage/assets/extensions/jquery/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
     @stack('head')
 </head>
 
@@ -26,7 +28,7 @@
                 <div class="header-top">
                     <div class="container">
                         <div class="logo">
-                            <a href="#"><img src="{{ asset('storage/assets/images/logo/logo-mng.png') }}"
+                            <a href="#"><img src="{{ asset('assets/images/logo/logo-mng.png') }}"
                                     style="width: 30px; height: 30px;" alt="Logo"></a>
                             <span class="font-weight-bold">Sistem Informasi Dokumentasi Minangkabau</span>
                         </div>
@@ -36,7 +38,7 @@
                                     class="user-dropdown d-flex align-items-center dropend dropdown-toggle "
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar avatar-md2">
-                                        <img src="{{ asset('storage/assets/images/faces/1.jpg') }}" alt="Avatar">
+                                        <img src="{{ asset('assets/images/faces/1.jpg') }}" alt="Avatar">
                                     </div>
                                     <div class="text">
                                         <h6 class="user-dropdown-name">{{ auth()->user()->name }}</h6>
@@ -133,9 +135,9 @@
         </div>
     </div>
     @stack('body')
-    <script src="{{ asset('storage/assets/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
 
-    {{-- <script src="{{ asset('storage/assets/js/app.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/app.js') }}"></script> --}}
 </body>
 
 </html>
