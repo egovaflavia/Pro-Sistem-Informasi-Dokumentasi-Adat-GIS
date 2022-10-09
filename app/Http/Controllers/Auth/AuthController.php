@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function loginProses(Request $request)
     {
         if (Auth::attempt($request->only('username', 'password'))) {
-            return redirect()->route('home');
+            return redirect()->route('backend.home');
         } else {
             return redirect()->route('login');
         }

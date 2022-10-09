@@ -4,11 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ ucfirst(Route::current()->getName()) }} - {{ config('app.name') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('storage/assets/css/main/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('storage/assets/images/logo/logo-mng.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('storage/assets/images/logo/logo-mng.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('storage/assets/css/shared/iconly.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <script src="{{ asset('storage/assets/extensions/jquery/jquery.min.js') }}"></script>
+    @stack('head')
 </head>
 
 <body>
@@ -44,7 +52,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('backend.logout') }}">Logout</a></li>
                                 </ul>
                             </div> <!-- Burger button responsive -->
                             <a href="#" class="burger-btn d-block d-xl-none">
@@ -57,49 +65,49 @@
                     <div class="container">
                         <ul>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.home') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.berita.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Berita</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.makanan.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
-                                    <span>Kuliner</span>
+                                    <span>Makanan</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.kerajinan.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Kerajinan</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.kesenian.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Kesenian</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.upacara.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Upacara Adat</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.pepatah.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Petatah - Petitih</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
+                                <a href="{{ route('backend.berita.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Laporan</span>
                                 </a>
@@ -124,11 +132,10 @@
             </footer>
         </div>
     </div>
+    @stack('body')
     <script src="{{ asset('storage/assets/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('storage/assets/js/app.js') }}"></script>
-    <script src="{{ asset('storage/assets/js/pages/horizontal-layout.js') }}"></script>
-    <script src="{{ asset('storage/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('storage/assets/js/pages/dashboard.js') }}"></script>
+
+    {{-- <script src="{{ asset('storage/assets/js/app.js') }}"></script> --}}
 </body>
 
 </html>
