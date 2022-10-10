@@ -32,6 +32,9 @@
                 .toString()
             ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
             .openOn(mymap);
+
+        $('#kerajinan_lat').val(e.latlng.lat);
+        $('#kerajinan_long').val(e.latlng.lng);
     }
 
 </script>

@@ -34,6 +34,9 @@
                 .toString()
             ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
             .openOn(mymap);
+
+        $('#makanan_lat').val(e.latlng.lat);
+        $('#makanan_long').val(e.latlng.lng);
     }
 
 </script>
@@ -45,7 +48,7 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h3> {{ ucfirst($row->berita_judul) }}</h3>
+            <h3>Makanan</h3>
             <a href="{{ route('backend.berita.index') }}" class="btn btn-success">
                 Kembali
             </a>

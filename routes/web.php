@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BackEnd\HomeController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\KerajinanController;
 use App\Http\Controllers\KesenianController;
 use App\Http\Controllers\MakananController;
@@ -22,9 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('backend.home');
-});
+Route::get('/', [FrontendController::class, 'index']);
 
 Route::group([
     'middleware' => 'auth',
@@ -86,8 +85,8 @@ Route::group([
     });
 
     Route::group([
-        'prefix' => 'upacara/',
-        'as' => 'upacara.'
+        'prefix' => 'perhelatan/',
+        'as' => 'perhelatan.'
     ], function () {
         Route::get('index', [PerhelatanController::class, 'index'])->name('index');
         Route::get('gis', [PerhelatanController::class, 'gis'])->name('gis');

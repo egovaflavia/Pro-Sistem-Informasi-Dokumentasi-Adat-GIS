@@ -34,6 +34,9 @@
                 .toString()
             ) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
             .openOn(mymap);
+    $('#makanan_lat').val(e.latlng.lat);
+    $('#makanan_long').val(e.latlng.lng);
+
     }
 
 </script>
@@ -60,7 +63,7 @@
                         <div class="modal-body">
                             <label>Nama Makanan: </label>
                             <div class="form-group">
-                                <input type="text" name="makanan_nama" id="makanan_nama" placeholder="Judul Berita"
+                                <input type="text" name="makanan_nama" id="makanan_nama" placeholder=""
                                     class="form-control" value="{{ old('makanan_nama') }}">
                                 @if ($errors->has('makanan_nama'))
                                 <span class="text-danger">{{ $errors->first('makanan_nama') }}</span>

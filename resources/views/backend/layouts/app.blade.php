@@ -52,15 +52,6 @@
                                         </p>
                                     </div>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end shadow-lg"
-                                    aria-labelledby="topbarUserDropdown">
-                                    <li><a class="dropdown-item" href="#">My Account</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('backend.logout') }}">Logout</a></li>
-                                </ul>
                             </div> <!-- Burger button responsive -->
                             <a href="#" class="burger-btn d-block d-xl-none">
                                 <i class="bi bi-justify fs-3"></i>
@@ -102,21 +93,27 @@
                                 </a>
                             </li>
                             <li class="menu-item  ">
-                                <a href="{{ route('backend.upacara.index') }}" class='menu-link'>
+                                <a href="{{ route('backend.perhelatan.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
-                                    <span>Upacara Adat</span>
+                                    <span>Perhelatan Adat</span>
                                 </a>
                             </li>
                             <li class="menu-item  ">
                                 <a href="{{ route('backend.pepatah.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
-                                    <span>Petatah - Petitih</span>
+                                    <span>Pepatah</span>
                                 </a>
                             </li>
-                            <li class="menu-item  ">
+                            {{-- <li class="menu-item  ">
                                 <a href="{{ route('backend.berita.index') }}" class='menu-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Laporan</span>
+                                </a>
+                            </li> --}}
+                            <li class="menu-item  ">
+                                <a href="{{ route('backend.logout') }}" class='menu-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Logout</span>
                                 </a>
                             </li>
                         </ul>
