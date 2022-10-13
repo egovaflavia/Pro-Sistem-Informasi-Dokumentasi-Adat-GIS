@@ -35,7 +35,7 @@ class PerhelatanController extends Controller
             'perhelatan_lat'  => 'required',
             'perhelatan_long' => 'required',
             'perhelatan_ket'  => 'required',
-            'perhelatan_img'  => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'perhelatan_img'  => 'required|image|mimes:jpeg,jpg,png,gif,svg',
         ], [
             'required' => ':attribute harus di isi ',
             'mimes'    => ':attribute harus format jpeg/jpg/png/gif/svg',

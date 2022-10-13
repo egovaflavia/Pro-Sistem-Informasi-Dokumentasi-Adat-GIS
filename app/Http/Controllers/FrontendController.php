@@ -21,12 +21,12 @@ class FrontendController extends Controller
         $kesenian = Kesenian::all();
         $perhelatan = Perhelatan::all();
         return view('frontend.index', [
-            'berita'     => $berita,
-            'makanan'    => $makanan,
-            'kerajinan'  => $kerajinan,
-            'kesenian'   => $kesenian,
-            'pepatah'    => $pepatah,
-            'upacara' => $perhelatan,
+            'berita'    => $berita,
+            'makanan'   => $makanan,
+            'kerajinan' => $kerajinan,
+            'kesenian'  => $kesenian,
+            'pepatah'   => $pepatah,
+            'upacara'   => $perhelatan,
         ]);
     }
 }
